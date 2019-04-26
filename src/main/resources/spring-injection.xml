@@ -5,6 +5,7 @@
 
     <bean id="serviceImpl" class="com.conan.services.ServiceImpl">
         <property name="iDao" ref="daoImpl"/>
+        <constructor-arg name="iDao" ref="daoImpl"/>
     </bean>
 
     <bean id="daoImpl" class="com.conan.dao.DaoImpl"></bean>

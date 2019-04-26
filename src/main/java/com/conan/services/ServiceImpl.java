@@ -6,7 +6,13 @@ public class ServiceImpl implements IService {
 
     private IDao iDao;
 
+    public ServiceImpl(IDao iDao) {
+        System.out.println("ServiceImpl 构造 ");
+        this.iDao = iDao;
+    }
+
     public void setiDao(IDao iDao) {
+        System.out.println("ServiceImpl 设置 ");
         this.iDao = iDao;
     }
 
