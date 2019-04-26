@@ -1,5 +1,6 @@
 package com.conan.test;
 
+import com.conan.annotation.AnnotationAutowiredApplicationContext;
 import com.conan.annotation.AnnotationBean;
 import com.conan.annotation.services.ServiceImpl;
 import com.conan.test.base.UnitTestBase;
@@ -20,7 +21,7 @@ public class TestUnit extends UnitTestBase {
     public void test() {
         System.out.println("xx");
 
-        com.conan.services.ServiceImpl  service = (com.conan.services.ServiceImpl) context.getBean("serviceImpl");
+        com.conan.services.ServiceImpl service = (com.conan.services.ServiceImpl) context.getBean("serviceImpl");
         service.save("wwwwww");
     }
 
@@ -44,5 +45,33 @@ public class TestUnit extends UnitTestBase {
         ServiceImpl myServiceImpl = (ServiceImpl) context.getBean("myServiceImpl");
         myServiceImpl.save("autowarid 测试");
 
+    }
+
+    /**
+     * Autowired  直接提供 ApplicationContext
+     */
+    @Test
+    public void testAnnotationAutowiredApplicationContext() {
+        AnnotationAutowiredApplicationContext aaac = (AnnotationAutowiredApplicationContext) context.getBean("aaac");
+        aaac.getSerice();
+
+    }
+
+    /**
+     * Autowired  提供 set
+     */
+    @Test
+    public void testAnnotationAutowiredSets() {
+        AnnotationAutowiredApplicationContext aaac = (AnnotationAutowiredApplicationContext) context.getBean("aaac");
+        aaac.printlnDaosName();
+    }
+
+    /**
+     * Autowired  提供 map
+     */
+    @Test
+    public void testAnnotationAutowiredMap() {
+        AnnotationAutowiredApplicationContext aaac = (AnnotationAutowiredApplicationContext) context.getBean("aaac");
+        aaac.printlnDaosNameforMap();
     }
 }

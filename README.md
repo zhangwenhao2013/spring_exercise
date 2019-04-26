@@ -88,7 +88,25 @@
     
     3:如果参数是接口, 接口又有多实例,可以配合 @Qualifier(限定)使用
     
+ 8: Autowired 额外提供
+ 
+    1: Autowired 可以提供众所周知的对象的实例, 比如 ApplicationContext
     
+    2: Autowired 可以提供 容器中 同属性的类的集合, 可以是 集合 ,数组 ,Map
+    
+    3: 如果希望数组是有序的,可以让bean实现 org.springframework.core.Ordered 接口;
+    或者使用@Order注解;
+    
+ 9: 使用 Autowired  注意事项
+ 
+    1:  @Autowired  注解是Spring BeanPostProcessor处理的,所以不能再自己的BeanPostProcessor
+    或者BeanFactoryPostProcessor类型应用这些注解;这些类型必须通过XML或者Spring的@Bean注解加载;
+    
+    
+    
+    
+    
+         
     
 
     
