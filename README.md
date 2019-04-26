@@ -95,15 +95,45 @@
     2: Autowired 可以提供 容器中 同属性的类的集合, 可以是 集合 ,数组 ,Map
     
     3: 如果希望数组是有序的,可以让bean实现 org.springframework.core.Ordered 接口;
-    或者使用@Order注解;
+    或者使用@Order注解;  order 只针对 数组有效
     
  9: 使用 Autowired  注意事项
  
     1:  @Autowired  注解是Spring BeanPostProcessor处理的,所以不能再自己的BeanPostProcessor
     或者BeanFactoryPostProcessor类型应用这些注解;这些类型必须通过XML或者Spring的@Bean注解加载;
     
+ 10 : @Bean
+ 
+    1:@Bean 标识一个用于配置和初始化一个 有SpringIoC容器管理的新对象的方法，类似XML 中的<bean/>
+    
+    2:可以在Spring 的@Component 注解的类中使用@Bean 注解任何方法（仅仅是可以）
+    
+    3:通常是使用 @Configuration 配合 @Bean 使用
     
     
+
+    ```
+   
+      	@Configuration
+      public  class AppConfig{
+      
+         @Bean
+         public Myservice myService( ){
+            return new Myservice( );
+          }
+      }
+      		@Bean(name = "相当于xml 中的id")
+      			如果定义在方法上  默认名字是方法名
+      		@Bean(initMethod = " init")
+      			类似xml 中的
+      		@Bean( destroyMethod ="cleanup")
+      			类似xml 中的
+      	<beans>
+        <bean id = "myService" class = 'xxx,xxx,xxx,MyServiceIMpl">
+      </beans>
+      	两种效果等价
+      	
+      	 ```
     
     
          
