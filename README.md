@@ -66,7 +66,29 @@
              @Repository  注解(DAO)
              @Service      注解(service)
              @Controller   注解(MVC)的Controller类
+           
+    3: 命名规则 bean名称默认是有BeanNameGenerator 生成;
+    
+        3.1 : 修改name 生成规则
+            3.1.1: 实现BeanNameGenerator; 一定要有默认构造;
+            3.1.2: 配置name-generator
+                 
+    4: 作用域 Scope 
         
+        4.1: @Scope(scopename = "xxx")
+        4.2: 自定义Scope 
+            4.2.1 :实现ScopeMetadataResolver接口; 一定要有默认构造;
+            4.2.2 :配置 scope-resolver ="自定义scope" 
+            
+ 7: @Autowired
+    
+    1:Autowired 可以用再  构造 , 方法, 属性上
+    
+    2:非不要的参数  可以使用@Autowired(required = false)
+    
+    3:如果参数是接口, 接口又有多实例,可以配合 @Qualifier(限定)使用
+    
+    
     
 
     

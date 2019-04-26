@@ -1,6 +1,7 @@
 package com.conan.test;
 
-import com.conan.services.ServiceImpl;
+import com.conan.annotation.AnnotationBean;
+import com.conan.annotation.services.ServiceImpl;
 import com.conan.test.base.UnitTestBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,12 +20,29 @@ public class TestUnit extends UnitTestBase {
     public void test() {
         System.out.println("xx");
 
-        ServiceImpl service = (ServiceImpl) context.getBean("serviceImpl");
+        com.conan.services.ServiceImpl  service = (com.conan.services.ServiceImpl) context.getBean("serviceImpl");
         service.save("wwwwww");
     }
 
     @Test
     public void testApplicationAware() {
+
+
+    }
+
+    @Test
+    public void testAnnotationBean() {
+        AnnotationBean anb = (AnnotationBean) context.getBean("anb");
+        AnnotationBean anb2 = (AnnotationBean) context.getBean("anb");
+        anb.print("测试成功" + anb.hashCode());
+        anb.print("测试成功" + anb2.hashCode());
+    }
+
+    @Test
+    public void testAnnotationBeanAutowired() {
+
+        ServiceImpl myServiceImpl = (ServiceImpl) context.getBean("myServiceImpl");
+        myServiceImpl.save("autowarid 测试");
 
     }
 }
