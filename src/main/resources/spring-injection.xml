@@ -10,4 +10,6 @@
 
     <bean id="daoImpl" class="com.conan.dao.DaoImpl"></bean>
 
+    <bean id="applicaContextAware" class="com.conan.aware.ApplicaContextAware"/>
+
 </beans>

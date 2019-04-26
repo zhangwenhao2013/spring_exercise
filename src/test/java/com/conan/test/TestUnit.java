@@ -10,7 +10,8 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 public class TestUnit extends UnitTestBase {
 
     public TestUnit() {
-        super("classpath:spring-injection.xml");
+//        super("classpath:spring-injection.xml");
+        super("classpath:spring-a.xml");
         System.out.println("TestUnit");
     }
 
@@ -20,5 +21,10 @@ public class TestUnit extends UnitTestBase {
 
         ServiceImpl service = (ServiceImpl) context.getBean("serviceImpl");
         service.save("wwwwww");
+    }
+
+    @Test
+    public void testApplicationAware() {
+
     }
 }

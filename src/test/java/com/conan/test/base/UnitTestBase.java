@@ -33,5 +33,6 @@ public class UnitTestBase {
     @After
     public void after() {
         System.out.println("after");
+        context.close();
     }
 }
