@@ -99,6 +99,8 @@
     3: 如果希望数组是有序的,可以让bean实现 org.springframework.core.Ordered 接口;
     或者使用@Order注解;  order 只针对 数组有效
     
+    4: Autowired 还可以通过泛型 自动装载
+    
  9: 使用 Autowired  注意事项
  
     1:  @Autowired  注解是Spring BeanPostProcessor处理的,所以不能再自己的BeanPostProcessor
@@ -156,14 +158,35 @@
     3: 注意!!!!!  properties 的key值 ;
     
     
-    
+  12 : CustomAutowireConfigurer
+  
+         CustomAutowireConfigurer 是 BeanFactoryPostProcessor 的子类, 通过他可以注册自己的
+         qualifier 注册类型(即使没有使用Spring的@Qualifier注解)
+        
+        
+        这里不是 很清楚!!!!
          
+         
+  13 : @Resource   @PostConstruct  @preDestroy  JSR-250 标准
+  
+        @Resource : 默认的名称 是属性名  或者 setter 方法得出的名字.
+        
+        @PostConstruct: 在构造之后立即执行
+        
+        @PreDestroy: 在销毁之前执行
     
 
+  14: Spring3.0 开始支持 JSR330 标准注解  
     
+    1:需要引入 javax.inject 包
     
+    2;@Inject 等效于 @Autowired, 可以用再类,属性,方法,构造器上;
         
+    3:@Named 如果使用特定的名称进行依赖住,使用@Name 于 @Component是等效的;
+        3.1 作用在方法的参数上,类似qualifier 用来限制方法传入的参数;
+        3.2 用来指定某个类的 name    
       
     
 
 
+ 
