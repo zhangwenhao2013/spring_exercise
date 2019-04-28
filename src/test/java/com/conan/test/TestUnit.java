@@ -3,6 +3,9 @@ package com.conan.test;
 import com.conan.annotation.AnnotationAutowiredApplicationContext;
 import com.conan.annotation.AnnotationBean;
 import com.conan.annotation.services.ServiceImpl;
+import com.conan.beans.JdbcDriver;
+import com.conan.beans.JdbcDriverFactory;
+import com.conan.beans.Store;
 import com.conan.test.base.UnitTestBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -73,5 +76,22 @@ public class TestUnit extends UnitTestBase {
     public void testAnnotationAutowiredMap() {
         AnnotationAutowiredApplicationContext aaac = (AnnotationAutowiredApplicationContext) context.getBean("aaac");
         aaac.printlnDaosNameforMap();
+    }
+
+
+    /**
+     * 测试 @Bean  配合 @Configuration
+     */
+    @Test
+    public void testBeanConfiguration() {
+        Store store = (Store) context.getBean("getStringStore");
+        System.out.println(store.getClass().getName());
+    }
+
+    @Test
+    public void testJdbcDriverFactory() {
+        JdbcDriver jdbcDriver = (JdbcDriver) context.getBean("getJdbcDriver");
+
+        System.out.println(jdbcDriver.toString());
     }
 }

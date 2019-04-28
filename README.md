@@ -6,9 +6,11 @@
  IoC 控制反转也是 Java 7大设计原则之一 依赖倒置,单一职责的一种体现；
  
 2: Ioc 中的Dependency Injection 依赖注入,注入方式有 : 
+
     2.1 构造注入
     2.2 set注入
     2.3 接口注入
+    
     目的都是为了给目标类提供相应的实例对象;
     
 3:  Spring  bean 初始化的方式;
@@ -44,7 +46,7 @@
     2 : 自动装配的类型有,  No, byName (id 的形式) , byType (类型), construct (构造,其本质也是 byType);
     
     
-6: 使用注解方式 实现Bean的自动检测 和  自动注册
+6: 使用注解方式(其实是使用XML 配合注解的方式,后面有 纯注解的方式 @Bean) 实现Bean的自动检测 和  自动注册 
 
     1: 自动检测的基础  Bean 需要被类注解注解 ;@Component 及其 被@Component注解的注解;
     
@@ -84,7 +86,7 @@
     
     1:Autowired 可以用再  构造 , 方法, 属性上
     
-    2:非不要的参数  可以使用@Autowired(required = false)
+    2:非必要的参数  可以使用@Autowired(required = false)
     
     3:如果参数是接口, 接口又有多实例,可以配合 @Qualifier(限定)使用
     
@@ -134,6 +136,25 @@
       	两种效果等价
       	
       	 ```
+      	 
+      	 
+      	
+  11: 配置文件
+    
+    xml 方式
+    
+    1: 加载配置文件 <context:property location =" class:/com.ame/jdbc.properties"">
+    
+    2: 读取配置文件中的 key value , value = "${key}"
+    
+    注解方式
+    
+    1:加载配置文件: 类上使用 @Configuration  配合 @ImportResource("classpath:/com/ame/jdbc.properties")
+    
+    2:读取配置文件中的 key  value , 使用 @Value("${key}")
+    
+    3: 注意!!!!!  properties 的key值 ;
+    
     
     
          
