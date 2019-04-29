@@ -1,6 +1,6 @@
 package com.conan.aopbaseconfig;
 
-public class AspectBiz {
+public class AspectBiz extends AspectBiz2{
 
     public void init() {
         System.out.println("这里是 AspectBiz 类的 init  方法");

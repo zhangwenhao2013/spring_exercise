@@ -19,6 +19,9 @@
                                  pointcut="execution(* com.conan.aopbaseconfig.AspectBiz.*(..)))"/>
 
             <aop:around method="aroundMethod" pointcut="execution(* com.conan.aopbaseconfig.AspectBiz.doArround()))"/>
+            
+            <aop:declare-parents types-matching="com.conan.aopbaseconfig.AspectBiz" implement-interface="com.conan.aopbaseconfig.IntroductionInterface"
+                                 default-impl="com.conan.aopbaseconfig.IntroductionIntImpl"/>
         </aop:aspect>
 
 

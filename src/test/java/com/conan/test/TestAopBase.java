@@ -1,6 +1,8 @@
 package com.conan.test;
 
 import com.conan.aopbaseconfig.AspectBiz;
+import com.conan.aopbaseconfig.IntroductionIntImpl;
+import com.conan.aopbaseconfig.IntroductionInterface;
 import com.conan.test.base.UnitTestBase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +42,13 @@ public class TestAopBase extends UnitTestBase {
     public void testAopArround() {
         AspectBiz aspectBiz = (AspectBiz) context.getBean("aspectBiz");
         aspectBiz.doArround();
+
+    }
+
+    @Test
+    public void testAopIntroduction() {
+        IntroductionInterface aspectBiz = (IntroductionInterface) context.getBean("aspectBiz");
+        aspectBiz.upcase("abcdef");
 
     }
 

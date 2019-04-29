@@ -196,5 +196,9 @@
     3:advice 有 before , after , after-returnning ,after-throwing ,arround 
     
     4: introduction 配合<aop:declare-parents>
+    
+        types-matching中匹配到的对象，相当于会给此类添加一个父类. 即使是该类已经继承过了;
+        
+    
 
  
