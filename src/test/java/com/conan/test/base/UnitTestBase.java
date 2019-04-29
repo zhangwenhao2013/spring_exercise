@@ -17,7 +17,7 @@ public class UnitTestBase {
 
     @Before
     public void beforeTest() {
-        System.out.println("beforeTest");
+        System.out.println("===================before==================");
         if (StringUtils.isEmpty(springXmlpath)) {
             springXmlpath = "classpath*:spring-*.xml";
         }
@@ -32,7 +32,7 @@ public class UnitTestBase {
 
     @After
     public void after() {
-        System.out.println("after");
+        System.out.println("===================after==================");
         context.close();
     }
 }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--定义自己的 advice   分别对应 aop:before ,aop:after-returning ,aop:after-throwing ,aop:arround -->
+    <bean id="myBeforeAdvice" class="com.conan.aopbaseconfig.advice.MyMethodBeforeAdvice"/>
+    <bean id="myMethodAfterReturningAdvice" class="com.conan.aopbaseconfig.advice.MyMethodAfterReturningAdvice"/>
+    <bean id="myAfterReturnThrowingAdvice" class="com.conan.aopbaseconfig.advice.MyAfterReturnThrowingAdvice"/>
+    <bean id="myAroundInterceptor" class="com.conan.aopbaseconfig.advice.MyAroundInterceptor"/>
+
+    <!--被切对象-->
+    <bean id="bizLogic" class="com.conan.aopbaseconfig.BizLogicImpl"/>
+
+    <!--切点-->
+    <bean id="pointcutBean" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedNames">
+            <list>
+                <value>sa*</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="defaultAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="pointcut" ref="pointcutBean"/>
+        <property name="advice" ref="myBeforeAdvice"/>
+    </bean>
+
+    <bean id="bizLogicImpl" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="bizLogic"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>defaultAdvisor</value>
+                <!--<value>myBeforeAdvice</value>  如果打开这个 和 defaultAdvisor 中的重复-->
+                <value>myMethodAfterReturningAdvice</value>
+                <value>myAfterReturnThrowingAdvice</value>
+                <value>myAroundInterceptor</value>
+            </list>
+        </property>
+    </bean>
+    <!--======================================================================================-->
+
+    <!--======================================================================================-->
+
+
+    <bean id="bizLogicImpl1" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <list>
+                <value>com.conan.aopbaseconfig.BizLogic</value><!--如果指定了接口 那就是通过jdk 动态代理的方式-->
+            </list>
+        </property>
+        <property name="target">
+            <ref bean="bizLogic"/> <!--可以使用匿名内部类的方式 指定目标类 这就不要在外部定义bean 外部定义bean 容器通过id可以直接访问到-->
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>myBeforeAdvice</value>
+                <value>myMethodAfterReturningAdvice</value>
+                <value>myAfterReturnThrowingAdvice</value>
+                <value>myAroundInterceptor</value>
+            </list>
+        </property>
+    </bean>
+</beans>

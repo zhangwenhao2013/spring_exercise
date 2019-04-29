@@ -4,14 +4,19 @@
        xmlns:tx="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
+    <!--切面-->
     <bean id="aspectEntry" class="com.conan.aopbaseconfig.MyAspect"></bean>
+
+    <!--被切对象-->
     <bean id="aspectBiz" class="com.conan.aopbaseconfig.AspectBiz"></bean>
+
+    <!--测试 advisor 提供的 接口实例 给容器提供接口实例-->
     <bean id="humen" class="com.conan.aopbaseconfig.Human"/>
     <bean id="sleepAdvisor" class="com.conan.aopbaseconfig.advice.SleepAdvisor"/>
 
     <aop:config>
         <aop:aspect id="aspectid" ref="aspectEntry">
+            <!--切点-->
             <aop:pointcut id="pointcutid" expression="execution(* com.conan.aopbaseconfig.AspectBiz.init()))"/>
             <aop:before method="before" pointcut-ref="pointcutid"/>
             <aop:after method="after" pointcut="execution(* com.conan.aopbaseconfig.AspectBiz.after()))"/>
@@ -21,8 +26,9 @@
                                  pointcut="execution(* com.conan.aopbaseconfig.AspectBiz.*(..)))"/>
 
             <aop:around method="aroundMethod" pointcut="execution(* com.conan.aopbaseconfig.AspectBiz.doArround()))"/>
-            
-            <aop:declare-parents types-matching="com.conan.aopbaseconfig.AspectBiz" implement-interface="com.conan.aopbaseconfig.IntroductionInterface"
+
+            <aop:declare-parents types-matching="com.conan.aopbaseconfig.AspectBiz"
+                                 implement-interface="com.conan.aopbaseconfig.IntroductionInterface"
                                  default-impl="com.conan.aopbaseconfig.IntroductionIntImpl"/>
         </aop:aspect>
 

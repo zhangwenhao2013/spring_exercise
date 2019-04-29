@@ -200,5 +200,108 @@
         types-matching中匹配到的对象，相当于会给此类添加一个父类. 即使是该类已经继承过了;
         
     
+ 16: Proxying classes
+ 
+    1:如果没有接口类.这种情况将使用CGLIB代理,而不是JDK动态代理;
+    
+    2:如果想强制使用CGLIB,可以配置生成的子类委托方法调用到原来的目标;
+    
+    3:子类是用Decorator 模式来实现的;
+    
+    4:CGLIB 不能覆盖final
+    
+    5:用*做通配符, 可以匹配所有拦截器,加入通知链; 只有实现了Intercept接口advice;
+    
+    6:使用<bean id ="xxx"  abstract ="true">  abstract ="true" 可以定义bean为抽象,提供给子bean 继承;
+    父bean 的内容支持被覆盖;
+    
+    
+  17:Spring API 
+    
+    1: Advice 继承关系
+       Advice
+         |--BeforeAdvice
+         |--Intercept
+         |--AfterAdvice
+            |--AfterReturningAdvice
+            |--After
+                |--ThrowAdvice
+     2:XML 使用Ioc的形式达到实现AOP  
+     
+ 
+ ```
+ 
+  <!--定义自己的 advice   分别对应 aop:before ,aop:after-returning ,aop:after-throwing ,aop:arround -->
+     <bean id="myBeforeAdvice" class="com.conan.aopbaseconfig.advice.MyMethodBeforeAdvice"/>
+     <bean id="myMethodAfterReturningAdvice" class="com.conan.aopbaseconfig.advice.MyMethodAfterReturningAdvice"/>
+     <bean id="myAfterReturnThrowingAdvice" class="com.conan.aopbaseconfig.advice.MyAfterReturnThrowingAdvice"/>
+     <bean id="myAroundInterceptor" class="com.conan.aopbaseconfig.advice.MyAroundInterceptor"/>
+ 
+     <!--被切对象-->
+     <bean id="bizLogic" class="com.conan.aopbaseconfig.BizLogicImpl"/>
+ 
+     <!--切点-->
+     <bean id="pointcutBean" class="org.springframework.aop.support.NameMatchMethodPointcut">
+         <property name="mappedNames">
+             <list>
+                 <value>sa*</value>
+             </list>
+         </property>
+     </bean>
+ 
+     <bean id="defaultAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+         <property name="pointcut" ref="pointcutBean"/>
+         <property name="advice" ref="myBeforeAdvice"/>
+     </bean>
+ 
+     <bean id="bizLogicImpl" class="org.springframework.aop.framework.ProxyFactoryBean">
+ 
+         <property name="target">
+             <ref bean="bizLogic"/>
+         </property>
+         <property name="interceptorNames">
+             <list>
+                 <value>defaultAdvisor</value>
+                 <!--<value>myBeforeAdvice</value>  如果打开这个 和 defaultAdvisor 中的重复-->
+                 <value>myMethodAfterReturningAdvice</value>
+                 <value>myAfterReturnThrowingAdvice</value>
+                 <value>myAroundInterceptor</value>
+             </list>
+         </property>
+     </bean>
+     <!--======================================================================================-->
+ 
+     <!--======================================================================================-->
+ 
+ 
+     <bean id="bizLogicImpl1" class="org.springframework.aop.framework.ProxyFactoryBean">
+         <property name="proxyInterfaces">
+             <list>
+                 <value>com.conan.aopbaseconfig.BizLogic</value><!--如果指定了接口 那就是通过jdk 动态代理的方式-->
+             </list>
+         </property>
+         <property name="target">
+             <ref bean="bizLogic"/> <!--可以使用匿名内部类的方式 指定目标类 这就不要在外部定义bean 外部定义bean 容器通过id可以直接访问到-->
+         </property>
+         <property name="interceptorNames">
+             <list>
+                 <value>myBeforeAdvice</value>
+                 <value>myMethodAfterReturningAdvice</value>
+                 <value>myAfterReturnThrowingAdvice</value>
+                 <value>myAroundInterceptor</value>
+             </list>
+         </property>
+     </bean>
 
+``` 
+
+       3:如果指定了proxyInterfaces 会通过JDK动态代理方式实现目标类方法的调用
+       如果没有指定proxyInterfaces 会通过CGLIB的代理方式,通过装饰模式,实现对目标类的调用;
+       
+       4:ProxyFactoryBean 之类的document 上有准确描述是否需要通过IOC 的set的方法赋值;
+       
+       5:如果目标自动是  list(或者数组)都可以用list代替. 如果只有一个参数,可以简化处理,不需要<list>
+       
+       
+    
  
