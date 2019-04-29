@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
     <bean id="aspectEntry" class="com.conan.aopbaseconfig.MyAspect"></bean>
     <bean id="aspectBiz" class="com.conan.aopbaseconfig.AspectBiz"></bean>
-
+    <bean id="humen" class="com.conan.aopbaseconfig.Human"/>
+    <bean id="sleepAdvisor" class="com.conan.aopbaseconfig.SleepAdvisor"/>
 
     <aop:config>
         <aop:aspect id="aspectid" ref="aspectEntry">
@@ -24,6 +26,11 @@
                                  default-impl="com.conan.aopbaseconfig.IntroductionIntImpl"/>
         </aop:aspect>
 
-
     </aop:config>
+
+    <aop:config>
+        <aop:advisor advice-ref="sleepAdvisor" id="advisorid"
+                     pointcut="execution( * com.conan.aopbaseconfig.Sleep.sleep())"/>
+    </aop:config>
+
 </beans>
