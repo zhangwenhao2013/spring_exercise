@@ -1,4 +1,4 @@
-package com.conan.aopbaseconfig;
+package com.conan.aopbaseconfig.advice;
 
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;

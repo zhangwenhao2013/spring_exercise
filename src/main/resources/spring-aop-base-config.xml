@@ -8,7 +8,7 @@
     <bean id="aspectEntry" class="com.conan.aopbaseconfig.MyAspect"></bean>
     <bean id="aspectBiz" class="com.conan.aopbaseconfig.AspectBiz"></bean>
     <bean id="humen" class="com.conan.aopbaseconfig.Human"/>
-    <bean id="sleepAdvisor" class="com.conan.aopbaseconfig.SleepAdvisor"/>
+    <bean id="sleepAdvisor" class="com.conan.aopbaseconfig.advice.SleepAdvisor"/>
 
     <aop:config>
         <aop:aspect id="aspectid" ref="aspectEntry">
