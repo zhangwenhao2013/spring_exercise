@@ -187,6 +187,14 @@
         3.2 用来指定某个类的 name    
       
     
-
+ 15:  AOP base  基于配置xml 的使用
+ 
+    1:需要引入AspectJ AOP 的依赖
+    
+    2:<aop:config> <aop:aspect> <aop:pointcut> <aop:advice(具体看情况)>顺序固定
+    
+    3:advice 有 before , after , after-returnning ,after-throwing ,arround 
+    
+    4: introduction 配合<aop:declare-parents>
 
  
