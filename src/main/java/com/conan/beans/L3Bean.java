@@ -13,26 +13,19 @@
 
 package com.conan.beans;
 
-import org.springframework.stereotype.Component;
-
 /**
  * @author: zhangwenhao
  * @since: 2019/6/20
  */
-@Component()
-public class L2Bean {
+public class L3Bean {
 
     private String name;
 
+    public L3Bean(String name) {
+        this.name = name;
+    }
+
     public void print() {
         System.out.println("autowired 成功   " +  this.hashCode());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

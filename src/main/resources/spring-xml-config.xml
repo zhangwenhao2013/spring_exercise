@@ -4,6 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean class="com.conan.beans.L2Bean"/>
+    <bean class="com.conan.beans.L3Bean">
+        <constructor-arg name="name" value="Conan"/>
+    </bean>
+
+    <bean class="com.conan.beans.L2Bean">
+        <property name="name" value="Conan2"/>
+    </bean>
 
 </beans>
