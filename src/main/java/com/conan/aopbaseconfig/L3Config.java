@@ -11,20 +11,25 @@
  * you entered into with iBOXCHAIN inc.
  */
 
-package com.conan.beans;
+package com.conan.aopbaseconfig;
 
-import org.springframework.stereotype.Component;
+import com.conan.beans.L2Bean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
+ *
  * @author: zhangwenhao
  * @since: 2019/6/20
  */
-@Component()
-public class L2Bean {
+@Configuration()
+public class L3Config {
 
-    private String name;
-
-    public void print() {
-        System.out.println("autowired 成功   " +  this.hashCode());
+    @Bean(initMethod = "print")
+    @Scope(scopeName = "prototype" )
+    public L2Bean creatL2Bean(){
+        return new L2Bean();
     }
+
 }
